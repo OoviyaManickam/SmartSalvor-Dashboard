@@ -9,12 +9,23 @@ import SoundAlert from './components/SoundAlert';
 import StatusBanner from './components/StatusBanner';
 import { Container, Typography, Grid } from '@mui/material';
 import '@fontsource/poppins'; // or '@fontsource/orbitron'
+import LoadingScreen from './components/LoadingScreen';
 
 
 function App() {
   const [data, setData] = useState(null);
   const [history, setHistory] = useState([]);
   const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Simulate 8-second loading screen
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 8000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const fetchLoop = async () => {
@@ -27,7 +38,11 @@ function App() {
     fetchLoop();
     const interval = setInterval(fetchLoop, 10000);
     return () => clearInterval(interval);
-  }, []);
+  // }, []);
+}, [loading]);
+
+  // Show loading screen for 8 seconds
+  if (loading) return <LoadingScreen />;
 
   return (
     <Container maxWidth="xl" sx={{ mt: 3, mb:3 }}>
