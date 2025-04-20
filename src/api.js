@@ -5,8 +5,8 @@ export async function fetchSensorData() {
     humidity: Math.floor(Math.random() * 40 + 40),
     motion: Math.round(Math.random()),
     detected: Math.random() > 0.6 ? "Yes" : "No",
-    lat: 13.0513,  
-    lon: 80.2214  
+    lat: 0.00,  
+    lon: 0.00  
   };
 }
 
